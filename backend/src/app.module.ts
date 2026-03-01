@@ -8,6 +8,8 @@ import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './common/guards/jwt-auth.guard';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { TripsService } from './trips/trips.service';
+import { TripsModule } from './trips/trips.module';
 
 @Module({
   imports: [
@@ -31,21 +33,23 @@ import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
     }),
     ThrottlerModule.forRoot([
       {
-        ttl: 60000,  // time window in milliseconds (60 seconds)
-        limit: 60,    // max requests per window
-      }
+        ttl: 60000, // time window in milliseconds (60 seconds)
+        limit: 60, // max requests per window
+      },
     ]),
     UsersModule,
     AuthModule,
+    TripsModule,
   ],
   controllers: [AppController],
   providers: [
     {
       provide: APP_GUARD,
-      useClass: JwtAuthGuard,   // runs on every route automatically
+      useClass: JwtAuthGuard, // runs on every route automatically
     },
     { provide: APP_GUARD, useClass: ThrottlerGuard },
-    AppService
+    AppService,
+    TripsService,
   ],
 })
 export class AppModule {}

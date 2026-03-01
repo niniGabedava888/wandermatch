@@ -7,7 +7,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Trip } from './trip.entity';
+import { Trip } from '../../trips/entities/trip.entity';
 
 export enum TravelStyle {
   ADVENTUROUS = 'adventurous',
