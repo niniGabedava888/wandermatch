@@ -8,7 +8,6 @@ import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './common/guards/jwt-auth.guard';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
-import { TripsService } from './trips/trips.service';
 import { TripsModule } from './trips/trips.module';
 
 @Module({
@@ -49,7 +48,6 @@ import { TripsModule } from './trips/trips.module';
     },
     { provide: APP_GUARD, useClass: ThrottlerGuard },
     AppService,
-    TripsService,
   ],
 })
 export class AppModule {}

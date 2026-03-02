@@ -7,7 +7,7 @@ import {
   Min,
   IsArray,
 } from 'class-validator';
-import { TravelStyle } from '../entities/user.entity';
+import { TravelStyle } from 'src/users/entities/user.entity';
 
 export class CreateUserDto {
   @IsEmail()
