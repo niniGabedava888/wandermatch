@@ -2,10 +2,26 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import api from '../api/axios'
 
+export enum TravelStyle {
+  ADVENTUROUS = 'adventurous',
+  RELAXED = 'relaxed',
+  CULTURAL = 'cultural',
+  BUDGET = 'budget',
+  LUXURY = 'luxury',
+}
+
 interface User {
   id: number
   email: string
   name: string
+  profilePhoto: string
+  age: number
+  gender: string
+  travelStyle: TravelStyle
+  interests: string[]
+  nationality: string
+  bio: string
+  languages: string[]
 }
 
 export const useAuthStore = defineStore('auth', () => {

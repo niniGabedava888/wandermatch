@@ -20,11 +20,11 @@ const router = createRouter({
       component: () => import('../views/Discover.vue'),
       meta: { requiresAuth: true }
     },
-    // {
-    //   path: '/profile',
-    //   component: () => import('../views/Profile/MyProfile.vue'),
-    //   meta: { requiresAuth: true }
-    // },
+    {
+      path: '/profile',
+      component: () => import('../views/Profile/MyProfile.vue'),
+      meta: { requiresAuth: true }
+    },
     // {
     //   path: '/trips',
     //   component: () => import('../views/Trips/MyTrips.vue'),
