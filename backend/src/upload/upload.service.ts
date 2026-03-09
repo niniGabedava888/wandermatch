@@ -28,7 +28,6 @@ export class UploadService {
           Key: fileName,
           Body: file,
           ContentType: mimeType,
-          ACL: 'public-read',
         }),
       );
 

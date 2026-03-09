@@ -17,6 +17,7 @@ export class TripsService {
   async create(userId: number, createTripDto: CreateTripDto) {
     const trip = this.tripRepository.create({ ...createTripDto, userId });
     await this.tripRepository.save(trip);
+    return trip;
   }
 
   async delete(tripId: number, userId: number) {
@@ -35,10 +36,10 @@ export class TripsService {
     return { message: 'Trip deleted' };
   }
 
-    async findMyTrips(userId: number) {
+  async findMyTrips(userId: number) {
     return this.tripRepository.find({
       where: { userId },
-      order: { startDate: 'ASC' }
-    })
+      order: { startDate: 'ASC' },
+    });
   }
 }

@@ -9,6 +9,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './common/guards/jwt-auth.guard';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { TripsModule } from './trips/trips.module';
+import { InterestsModule } from './interests/interests.module';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { TripsModule } from './trips/trips.module';
     UsersModule,
     AuthModule,
     TripsModule,
+    InterestsModule,
   ],
   controllers: [AppController],
   providers: [
