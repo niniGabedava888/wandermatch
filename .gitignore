@@ -39,15 +39,3 @@ Thumbs.db
 # ------------------------------
 .vscode/
 .idea/
-
-# ------------------------------
-# Coverage (if you test)
-# ------------------------------
-coverage/
-
-# ------------------------------
-# Optional: lock files (if you want)
-# ------------------------------
-# package-lock.json
-# pnpm-lock.yaml
-# yarn.lock
