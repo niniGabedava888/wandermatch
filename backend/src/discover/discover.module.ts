@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { DiscoveryController } from './discovery.controller';
-import { DiscoveryService } from './discovery.service';
+import { DiscoverController } from './discover.controller';
+import { DiscoverService } from './discover.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Trip } from 'src/trips/entities/trip.entity';
 import { User } from 'src/users/entities/user.entity';
@@ -9,7 +9,7 @@ import { Interests } from 'src/interests/entities/interests.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Trip, User, Interests]), InterestsModule],
-  controllers: [DiscoveryController],
-  providers: [DiscoveryService],
+  controllers: [DiscoverController],
+  providers: [DiscoverService],
 })
-export class DiscoveryModule {}
+export class DiscoverModule {}

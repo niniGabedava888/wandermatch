@@ -15,4 +15,5 @@ export class DiscoverResultDto {
   profilePhoto: string | null;
   matchingTrip: MatchingTripDto;
   interestStatus: 'pending' | 'accepted' | 'rejected' | null;
+  interestId: number | null;
 }

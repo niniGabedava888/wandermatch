@@ -17,7 +17,7 @@ const router = createRouter({
     },
     {
       path: '/discover',
-      component: () => import('../views/Discover.vue'),
+      component: () => import('../views/Discover/Discover.vue'),
       meta: { requiresAuth: true }
     },
     {

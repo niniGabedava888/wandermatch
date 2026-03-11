@@ -10,7 +10,7 @@ import { JwtAuthGuard } from './common/guards/jwt-auth.guard';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { TripsModule } from './trips/trips.module';
 import { InterestsModule } from './interests/interests.module';
-import { DiscoveryModule } from './discovery/discovery.module';
+import { DiscoverModule } from './discover/discover.module';
 
 @Module({
   imports: [
@@ -42,7 +42,7 @@ import { DiscoveryModule } from './discovery/discovery.module';
     AuthModule,
     TripsModule,
     InterestsModule,
-    DiscoveryModule,
+    DiscoverModule,
   ],
   controllers: [AppController],
   providers: [
