@@ -8,6 +8,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Trip } from '../../trips/entities/trip.entity';
+import { Interests } from 'src/interests/entities/interests.entity';
 
 export enum TravelStyle {
   ADVENTUROUS = 'adventurous',
@@ -68,4 +69,7 @@ export class User {
 
   @OneToMany(() => Trip, (trip) => trip.user)
   trips: Trip[];
+
+  @OneToMany(() => Interests, (interest) => interest.sender)
+  sentInterests: Interests[];
 }
