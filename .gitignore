@@ -39,3 +39,12 @@ Thumbs.db
 # ------------------------------
 .vscode/
 .idea/
+
+# backend
+backend/.env
+backend/dist/
+
+# frontend
+frontend/.env
+frontend/.env.production
+frontend/dist/

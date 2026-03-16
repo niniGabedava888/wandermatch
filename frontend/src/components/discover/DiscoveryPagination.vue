@@ -15,7 +15,7 @@
       <span v-if="p === '...'" class="w-9 h-9 flex items-center justify-center text-gray-300 text-sm">…</span>
       <button
         v-else
-        @click="emit('change', p)"
+        @click="emit('change', Number(p))"
         :class="[
           'w-9 h-9 rounded-lg border text-sm font-medium transition',
           p === meta.page
