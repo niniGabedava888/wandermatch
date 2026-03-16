@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
@@ -28,7 +26,10 @@ import { DiscoverModule } from './discover/discover.module';
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        // do not use syncronize true for prod
+        ssl:
+          configService.get('DB_HOST') !== 'localhost'
+            ? { rejectUnauthorized: false }
+            : false,
         synchronize: true,
       }),
     }),
@@ -44,14 +45,12 @@ import { DiscoverModule } from './discover/discover.module';
     InterestsModule,
     DiscoverModule,
   ],
-  controllers: [AppController],
   providers: [
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard, // runs on every route automatically
     },
     { provide: APP_GUARD, useClass: ThrottlerGuard },
-    AppService,
   ],
 })
 export class AppModule {}
