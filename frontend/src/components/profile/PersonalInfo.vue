@@ -1,11 +1,18 @@
-    <template>
+<template>
   <div>
     <div class="flex items-center justify-between mb-6">
       <h2 class="text-xl font-semibold text-gray-800">Personal Information</h2>
       <span v-if="saving" class="text-xs text-blue-500 flex items-center gap-1.5">
         <svg class="w-3 h-3 animate-spin" viewBox="0 0 24 24" fill="none">
-          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
-          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          />
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
         </svg>
         Saving changes
       </span>
@@ -26,7 +33,9 @@
         >
           {{ auth.user?.name?.[0]?.toUpperCase() ?? '?' }}
         </div>
-        <label class="absolute bottom-0 right-0 w-6 h-6 bg-gray-700 rounded-full flex items-center justify-center text-white text-xs hover:bg-gray-900 transition cursor-pointer">
+        <label
+          class="absolute bottom-0 right-0 w-6 h-6 bg-gray-700 rounded-full flex items-center justify-center text-white text-xs hover:bg-gray-900 transition cursor-pointer"
+        >
           ✎
           <input type="file" accept="image/*" class="hidden" @change="handleAvatarUpload" />
         </label>
@@ -41,17 +50,29 @@
       <div class="grid grid-cols-2 gap-4 mb-4">
         <div>
           <label class="block text-xs font-medium text-gray-600 mb-1.5">Full Name</label>
-          <input v-model="form.name" class="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900" />
+          <input
+            v-model="form.name"
+            class="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900"
+          />
         </div>
 
         <div>
           <label class="block text-xs font-medium text-gray-600 mb-1.5">Age</label>
-          <input v-model.number="form.age" type="number" min="18" max="99" class="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900" />
+          <input
+            v-model.number="form.age"
+            type="number"
+            min="18"
+            max="99"
+            class="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900"
+          />
         </div>
 
         <div>
           <label class="block text-xs font-medium text-gray-600 mb-1.5">Gender</label>
-          <select v-model="form.gender" class="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 bg-white">
+          <select
+            v-model="form.gender"
+            class="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 bg-white"
+          >
             <option value="">Select gender</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
@@ -62,21 +83,33 @@
 
         <div>
           <label class="block text-xs font-medium text-gray-600 mb-1.5">Nationality</label>
-          <input v-model="form.nationality" class="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900" />
+          <input
+            v-model="form.nationality"
+            class="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900"
+          />
         </div>
 
         <div class="col-span-2">
           <label class="block text-xs font-medium text-gray-600 mb-1.5">Travel Style</label>
-          <select v-model="form.travelStyle" class="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 bg-white capitalize">
+          <select
+            v-model="form.travelStyle"
+            class="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 bg-white capitalize"
+          >
             <option value="">Select style</option>
-            <option v-for="style in travelStyles" :key="style" :value="style" class="capitalize">{{ style }}</option>
+            <option v-for="style in travelStyles" :key="style" :value="style" class="capitalize">
+              {{ style }}
+            </option>
           </select>
         </div>
       </div>
 
       <div class="mb-4">
         <label class="block text-xs font-medium text-gray-600 mb-1.5">Bio</label>
-        <textarea v-model="form.bio" rows="3" class="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 resize-none" />
+        <textarea
+          v-model="form.bio"
+          rows="3"
+          class="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 resize-none"
+        />
       </div>
 
       <div class="mb-4">
@@ -117,8 +150,30 @@ const saved = ref(false)
 const error = ref<string | null>(null)
 
 const travelStyles = ['adventurous', 'relaxed', 'cultural', 'budget', 'luxury']
-const interestOptions = ['hiking', 'food', 'nightlife', 'photography', 'history', 'art', 'beach', 'camping', 'cycling', 'museums']
-const languageOptions = ['English', 'Spanish', 'French', 'German', 'Italian', 'Portuguese', 'Japanese', 'Chinese', 'Arabic', 'Russian']
+const interestOptions = [
+  'hiking',
+  'food',
+  'nightlife',
+  'photography',
+  'history',
+  'art',
+  'beach',
+  'camping',
+  'cycling',
+  'museums',
+]
+const languageOptions = [
+  'English',
+  'Spanish',
+  'French',
+  'German',
+  'Italian',
+  'Portuguese',
+  'Japanese',
+  'Chinese',
+  'Arabic',
+  'Russian',
+]
 
 const form = ref({
   name: '',
@@ -152,9 +207,9 @@ async function handleSave() {
   error.value = null
   try {
     const res = await api.patch('/users/me', form.value)
-    auth.user = res.data   // update store with fresh data
+    auth.user = res.data // update store with fresh data
     saved.value = true
-    setTimeout(() => saved.value = false, 2000)
+    setTimeout(() => (saved.value = false), 2000)
   } catch (err: any) {
     error.value = err.response?.data?.message || 'Failed to save'
   } finally {
@@ -169,7 +224,7 @@ async function handleAvatarUpload(event: Event) {
   formData.append('File', file)
   try {
     const res = await api.patch('/users/me/avatar', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' }
+      headers: { 'Content-Type': 'multipart/form-data' },
     })
     auth.user = res.data
   } catch (err: any) {

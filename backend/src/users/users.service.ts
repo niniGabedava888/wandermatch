@@ -8,7 +8,7 @@ import { UpdateProfileDto } from './dto/profile/update-profile.dto';
 export class UsersService {
   constructor(
     @InjectRepository(User)
-    private readonly usersRepository: Repository<User>,
+    private readonly usersRepository: Repository<User>
   ) {}
 
   async create(email: string, hashedPassword: string, name: string) {
@@ -30,16 +30,7 @@ export class UsersService {
   async findById(id: number) {
     const user = await this.usersRepository.findOne({
       where: { id },
-      select: [
-        'id',
-        'name',
-        'age',
-        'bio',
-        'travelStyle',
-        'interests',
-        'languages',
-        'profilePhoto',
-      ],
+      select: ['id', 'name', 'age', 'bio', 'travelStyle', 'interests', 'languages', 'profilePhoto'],
     });
     if (!user) throw new NotFoundException('User not found');
     return user;

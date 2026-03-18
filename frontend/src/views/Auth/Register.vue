@@ -1,15 +1,23 @@
 <template>
   <div class="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-    <div class="bg-white w-full max-w-3xl rounded-2xl shadow-xl overflow-hidden flex" style="height: 580px">
-
+    <div
+      class="bg-white w-full max-w-3xl rounded-2xl shadow-xl overflow-hidden flex"
+      style="height: 580px"
+    >
       <!-- Left: Form -->
       <div class="flex flex-col justify-center w-full md:w-1/2 px-8 py-10 overflow-y-auto">
         <div class="max-w-sm mx-auto w-full">
-
           <!-- Tabs -->
           <div class="flex gap-4 mb-8 border-b border-gray-100 pb-4">
-            <RouterLink to="/login" class="text-sm font-medium text-gray-400 hover:text-gray-600 transition pb-1">Login</RouterLink>
-            <span class="text-sm font-semibold text-gray-900 border-b-2 border-gray-900 pb-1 cursor-default">Sign Up</span>
+            <RouterLink
+              to="/login"
+              class="text-sm font-medium text-gray-400 hover:text-gray-600 transition pb-1"
+              >Login</RouterLink
+            >
+            <span
+              class="text-sm font-semibold text-gray-900 border-b-2 border-gray-900 pb-1 cursor-default"
+              >Sign Up</span
+            >
           </div>
 
           <h1 class="text-2xl font-bold text-gray-900 mb-1">Create account</h1>
@@ -74,10 +82,12 @@
                   'w-full border rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 placeholder-gray-300',
                   passwordMismatch
                     ? 'border-red-300 focus:ring-red-300'
-                    : 'border-gray-200 focus:ring-gray-900'
+                    : 'border-gray-200 focus:ring-gray-900',
                 ]"
               />
-              <p v-if="passwordMismatch" class="text-red-400 text-xs mt-1">Passwords do not match</p>
+              <p v-if="passwordMismatch" class="text-red-400 text-xs mt-1">
+                Passwords do not match
+              </p>
             </div>
 
             <button
@@ -96,7 +106,9 @@
 
             <p class="text-center text-xs text-gray-400">
               Already have an account?
-              <RouterLink to="/login" class="text-gray-900 font-semibold hover:underline">Sign in</RouterLink>
+              <RouterLink to="/login" class="text-gray-900 font-semibold hover:underline"
+                >Sign in</RouterLink
+              >
             </p>
           </form>
         </div>
@@ -124,8 +136,8 @@ const confirmPassword = ref('')
 const showPassword = ref(false)
 
 const error = computed(() => auth.error)
-const passwordMismatch = computed(() =>
-  confirmPassword.value.length > 0 && password.value !== confirmPassword.value
+const passwordMismatch = computed(
+  () => confirmPassword.value.length > 0 && password.value !== confirmPassword.value,
 )
 
 async function handleRegister() {

@@ -55,9 +55,13 @@
     <!-- Trip info -->
     <div class="flex items-center gap-1.5 mb-3">
       <span class="text-xs">📍</span>
-      <span class="text-xs font-medium text-gray-600">{{ user.matchingTrip.city }}, {{ user.matchingTrip.country }}</span>
+      <span class="text-xs font-medium text-gray-600"
+        >{{ user.matchingTrip.city }}, {{ user.matchingTrip.country }}</span
+      >
       <span class="text-xs text-gray-300 mx-1">·</span>
-      <span class="text-xs text-gray-400">{{ user.matchingTrip.startDate }} → {{ user.matchingTrip.endDate }}</span>
+      <span class="text-xs text-gray-400"
+        >{{ user.matchingTrip.startDate }} → {{ user.matchingTrip.endDate }}</span
+      >
     </div>
 
     <!-- Interest tags -->
@@ -75,7 +79,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import { useDiscoverStore, type DiscoverResult } from '../../stores/discover.store';
+import { useDiscoverStore, type DiscoverResult } from '../../stores/discover.store'
 
 const props = defineProps<{ user: DiscoverResult }>()
 const interestStatus = ref(props.user.interestStatus)
@@ -84,19 +88,19 @@ watch(
   () => props.user.interestStatus,
   (newVal) => {
     interestStatus.value = newVal
-  }
+  },
 )
 defineEmits(['click'])
 
 const discover = useDiscoverStore()
 const sending = ref(false)
 const interestError = ref<string | null>(null)
-  
+
 async function handleInterest() {
   sending.value = true
   interestError.value = null
   try {
-    await discover.sendInterest(props.user.id)
+    await discover.sendInterest(props.user.id, props.user.matchingTrip.id)
   } catch (err: any) {
     interestError.value = err.message
   } finally {

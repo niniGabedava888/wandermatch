@@ -16,27 +16,51 @@
       <div class="grid grid-cols-2 gap-3 mb-3">
         <div>
           <label class="block text-xs font-medium text-gray-600 mb-1.5">City</label>
-          <input v-model="form.city" placeholder="e.g. Barcelona" class="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900" />
+          <input
+            v-model="form.city"
+            placeholder="e.g. Barcelona"
+            class="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900"
+          />
         </div>
         <div>
           <label class="block text-xs font-medium text-gray-600 mb-1.5">Country</label>
-          <input v-model="form.country" placeholder="e.g. Spain" class="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900" />
+          <input
+            v-model="form.country"
+            placeholder="e.g. Spain"
+            class="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900"
+          />
         </div>
         <div>
           <label class="block text-xs font-medium text-gray-600 mb-1.5">Start Date</label>
-          <input v-model="form.startDate" type="date" class="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900" />
+          <input
+            v-model="form.startDate"
+            type="date"
+            class="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900"
+          />
         </div>
         <div>
           <label class="block text-xs font-medium text-gray-600 mb-1.5">End Date</label>
-          <input v-model="form.endDate" type="date" class="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900" />
+          <input
+            v-model="form.endDate"
+            type="date"
+            class="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900"
+          />
         </div>
       </div>
       <div class="mb-4">
         <label class="block text-xs font-medium text-gray-600 mb-1.5">Description (optional)</label>
-        <input v-model="form.description" placeholder="What are you planning?" class="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900" />
+        <input
+          v-model="form.description"
+          placeholder="What are you planning?"
+          class="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900"
+        />
       </div>
       <div v-if="formError" class="text-red-500 text-xs mb-3">{{ formError }}</div>
-      <button @click="addTrip" :disabled="adding" class="bg-gray-900 text-white text-sm font-semibold px-5 py-2 rounded-lg hover:bg-gray-800 disabled:opacity-50 transition">
+      <button
+        @click="addTrip"
+        :disabled="adding"
+        class="bg-gray-900 text-white text-sm font-semibold px-5 py-2 rounded-lg hover:bg-gray-800 disabled:opacity-50 transition"
+      >
         {{ adding ? 'Adding...' : 'Add Trip' }}
       </button>
     </div>
@@ -59,13 +83,22 @@
       >
         <div>
           <div class="flex items-center gap-2 mb-1">
-            <span class="text-sm font-semibold text-gray-800">{{ trip.city }}, {{ trip.country }}</span>
-            <span class="text-xs bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full font-medium">Upcoming</span>
+            <span class="text-sm font-semibold text-gray-800"
+              >{{ trip.city }}, {{ trip.country }}</span
+            >
+            <span class="text-xs bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full font-medium"
+              >Upcoming</span
+            >
           </div>
           <p class="text-xs text-gray-400 mb-1">{{ trip.startDate }} → {{ trip.endDate }}</p>
           <p v-if="trip.description" class="text-xs text-gray-500">{{ trip.description }}</p>
         </div>
-        <button @click="deleteTrip(trip.id)" class="text-gray-300 hover:text-red-400 transition text-lg leading-none ml-4">✕</button>
+        <button
+          @click="deleteTrip(trip.id)"
+          class="text-gray-300 hover:text-red-400 transition text-lg leading-none ml-4"
+        >
+          ✕
+        </button>
       </div>
     </div>
   </div>
@@ -124,7 +157,7 @@ async function addTrip() {
 async function deleteTrip(id: number) {
   try {
     await api.delete(`/trips/${id}`)
-    trips.value = trips.value.filter(t => t.id !== id)
+    trips.value = trips.value.filter((t) => t.id !== id)
   } catch {
     // silently fail or show toast later
   }

@@ -1,8 +1,4 @@
-import {
-  DeleteObjectCommand,
-  PutObjectCommand,
-  S3Client,
-} from '@aws-sdk/client-s3';
+import { DeleteObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
@@ -28,7 +24,7 @@ export class UploadService {
           Key: fileName,
           Body: file,
           ContentType: mimeType,
-        }),
+        })
       );
 
       return `https://${this.configService.getOrThrow('AWS_S3_BUCKET')}.s3.${this.configService.getOrThrow('AWS_S3_REGION')}.amazonaws.com/${fileName}`;
@@ -43,7 +39,7 @@ export class UploadService {
         new DeleteObjectCommand({
           Bucket: this.configService.getOrThrow('AWS_S3_BUCKET'),
           Key: key,
-        }),
+        })
       );
     } catch {
       console.error(`File deletion for ${key} failed!`);

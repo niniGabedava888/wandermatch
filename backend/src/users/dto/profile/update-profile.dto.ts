@@ -1,12 +1,4 @@
-import {
-  IsString,
-  IsOptional,
-  IsInt,
-  IsEnum,
-  IsArray,
-  Min,
-  Max,
-} from 'class-validator';
+import { IsString, IsOptional, IsInt, IsEnum, IsArray, Min, Max } from 'class-validator';
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { TravelStyle } from '../../entities/user.entity';
 

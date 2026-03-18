@@ -1,6 +1,5 @@
 <template>
   <div v-if="meta && meta.totalPages > 1" class="flex items-center justify-center gap-2 mt-8">
-
     <!-- Prev -->
     <button
       @click="emit('change', meta.page - 1)"
@@ -12,7 +11,11 @@
 
     <!-- Page numbers -->
     <template v-for="p in pages" :key="p">
-      <span v-if="p === '...'" class="w-9 h-9 flex items-center justify-center text-gray-300 text-sm">…</span>
+      <span
+        v-if="p === '...'"
+        class="w-9 h-9 flex items-center justify-center text-gray-300 text-sm"
+        >…</span
+      >
       <button
         v-else
         @click="emit('change', Number(p))"
@@ -20,7 +23,7 @@
           'w-9 h-9 rounded-lg border text-sm font-medium transition',
           p === meta.page
             ? 'bg-gray-900 text-white border-gray-900'
-            : 'border-gray-200 text-gray-500 hover:border-gray-400'
+            : 'border-gray-200 text-gray-500 hover:border-gray-400',
         ]"
       >
         {{ p }}
@@ -35,7 +38,6 @@
     >
       ›
     </button>
-
   </div>
 </template>
 

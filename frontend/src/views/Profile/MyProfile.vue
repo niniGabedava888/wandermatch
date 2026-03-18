@@ -1,10 +1,11 @@
 <template>
   <div class="min-h-screen bg-gray-50 flex items-start justify-center p-8">
     <div class="w-full max-w-4xl flex gap-6">
-
       <!-- Sidebar -->
       <div class="w-56 shrink-0">
-        <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 px-3">Profile</p>
+        <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 px-3">
+          Profile
+        </p>
         <nav class="flex flex-col gap-1">
           <button
             v-for="item in sidebar"
@@ -14,7 +15,7 @@
               'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition text-left',
               active === item.key
                 ? 'bg-gray-900 text-white'
-                : 'text-gray-500 hover:bg-gray-100 hover:text-gray-800'
+                : 'text-gray-500 hover:bg-gray-100 hover:text-gray-800',
             ]"
           >
             <span>{{ item.icon }}</span>
@@ -28,7 +29,6 @@
         <PersonalInfo v-if="active === 'personal'" />
         <TripsSection v-if="active === 'trips'" />
       </div>
-
     </div>
   </div>
 </template>

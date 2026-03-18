@@ -1,15 +1,23 @@
 <template>
   <div class="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-    <div class="bg-white w-full max-w-3xl rounded-2xl shadow-xl overflow-hidden flex" style="height: 580px">
-
+    <div
+      class="bg-white w-full max-w-3xl rounded-2xl shadow-xl overflow-hidden flex"
+      style="height: 580px"
+    >
       <!-- Left: Form -->
       <div class="flex flex-col justify-center w-full md:w-1/2 px-8 py-10 overflow-y-auto">
         <div class="max-w-sm mx-auto w-full">
-
           <!-- Tabs -->
           <div class="flex gap-4 mb-8 border-b border-gray-100 pb-4">
-            <span class="text-sm font-semibold text-gray-900 border-b-2 border-gray-900 pb-1 cursor-default">Login</span>
-            <RouterLink to="/register" class="text-sm font-medium text-gray-400 hover:text-gray-600 transition pb-1">Sign Up</RouterLink>
+            <span
+              class="text-sm font-semibold text-gray-900 border-b-2 border-gray-900 pb-1 cursor-default"
+              >Login</span
+            >
+            <RouterLink
+              to="/register"
+              class="text-sm font-medium text-gray-400 hover:text-gray-600 transition pb-1"
+              >Sign Up</RouterLink
+            >
           </div>
 
           <h1 class="text-2xl font-bold text-gray-900 mb-1">Welcome!</h1>
@@ -68,7 +76,9 @@
 
             <p class="text-center text-xs text-gray-400">
               Don't have an account?
-              <RouterLink to="/register" class="text-gray-900 font-semibold hover:underline">Sign up</RouterLink>
+              <RouterLink to="/register" class="text-gray-900 font-semibold hover:underline"
+                >Sign up</RouterLink
+              >
             </p>
           </form>
         </div>

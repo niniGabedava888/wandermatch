@@ -23,8 +23,13 @@ export class DiscoverService {
     const qb = this.tripRepository
       .createQueryBuilder('trip')
       .innerJoinAndSelect('trip.user', 'user')
-      .where('trip.userId != :currentUserId', { currentUserId })
-      .andWhere('LOWER(trip.city) = LOWER(:city)', { city: query.city });
+      .where('trip.userId != :currentUserId', { currentUserId });
+
+    if (query.city) {
+      qb.andWhere('LOWER(trip.city) = LOWER(:city)', {
+        city: query.city,
+      });
+    }
 
     if (query.country) {
       qb.andWhere('LOWER(trip.country) = LOWER(:country)', {
@@ -78,6 +83,7 @@ export class DiscoverService {
       result.languages = trip.user.languages;
       result.profilePhoto = trip.user.profilePhoto ?? null;
       result.matchingTrip = {
+        id: trip.id,
         city: trip.city,
         country: trip.country,
         startDate: trip.startDate,

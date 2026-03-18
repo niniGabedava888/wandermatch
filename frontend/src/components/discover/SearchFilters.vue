@@ -2,7 +2,6 @@
   <div class="bg-white border-b border-gray-200 px-6 py-4 sticky top-0 z-40">
     <div class="max-w-5xl mx-auto">
       <div class="flex items-center gap-3 flex-wrap">
-
         <!-- City -->
         <div class="relative flex-1 min-w-48">
           <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">🔍</span>
@@ -88,9 +87,7 @@ const filters = reactive({
   travelStyle: '',
 })
 
-const hasActiveFilters = computed(() =>
-  filters.startDate || filters.endDate || filters.travelStyle
-)
+const hasActiveFilters = computed(() => filters.startDate || filters.endDate || filters.travelStyle)
 
 function clearFilters() {
   filters.startDate = ''

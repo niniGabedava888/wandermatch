@@ -1,4 +1,5 @@
 export class MatchingTripDto {
+  id: number;
   city: string;
   country: string;
   startDate: string;

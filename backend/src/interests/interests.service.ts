@@ -15,7 +15,7 @@ import { RespondInterestDto } from './dto/respond-interest.dto';
 export class InterestsService {
   constructor(
     @InjectRepository(Interests)
-    private interestsRepository: Repository<Interests>,
+    private interestsRepository: Repository<Interests>
   ) {}
 
   async send(senderId: number, dto: CreateInterestDto) {
@@ -27,24 +27,23 @@ export class InterestsService {
     });
 
     if (existingInterest) {
-      throw new ConflictException(
-        'You have already sent interest to this user!',
-      );
+      throw new ConflictException('You have already sent interest to this user!');
     }
 
     const interest = this.interestsRepository.create({
       senderId,
       receiverId: dto.receiverId,
+      tripId: dto.tripId,
       status: InterestsStatus.PENDING,
     });
 
-    return await this.interestsRepository.save(interest);
+    return this.interestsRepository.save(interest);
   }
 
   async getReceived(userId: number) {
     const interests = await this.interestsRepository.find({
       where: { receiverId: userId },
-      relations: ['sender'],
+      relations: ['sender', 'trip'],
       order: { createdAt: 'DESC' },
     });
     return interests;
@@ -53,7 +52,7 @@ export class InterestsService {
   async getSent(userId: number) {
     const interests = await this.interestsRepository.find({
       where: { senderId: userId },
-      relations: ['receiver'],
+      relations: ['receiver', 'trip'],
       order: { createdAt: 'DESC' },
     });
 
@@ -71,9 +70,7 @@ export class InterestsService {
       throw new ForbiddenException('You can not respond to this interest!');
 
     if (interest.status !== InterestsStatus.PENDING)
-      throw new BadRequestException(
-        'This interest has already been responded!',
-      );
+      throw new BadRequestException('This interest has already been responded!');
 
     interest.status = dto.status;
     return this.interestsRepository.save(interest);

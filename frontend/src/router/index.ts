@@ -8,33 +8,33 @@ const router = createRouter({
     {
       path: '/login',
       component: () => import('../views/Auth/Login.vue'),
-      meta: { guestOnly: true }
+      meta: { guestOnly: true },
     },
     {
       path: '/register',
       component: () => import('../views/Auth/Register.vue'),
-      meta: { guestOnly: true }
+      meta: { guestOnly: true },
     },
     {
       path: '/discover',
       component: () => import('../views/Discover/Discover.vue'),
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true },
     },
     {
       path: '/profile',
       component: () => import('../views/Profile/MyProfile.vue'),
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true },
     },
     // {
     //   path: '/trips',
     //   component: () => import('../views/Trips/MyTrips.vue'),
     //   meta: { requiresAuth: true }
     // },
-    // {
-    //   path: '/interests',
-    //   component: () => import('../views/Interests.vue'),
-    //   meta: { requiresAuth: true }
-    // },
+    {
+      path: '/interests',
+      component: () => import('../views/Interests/Interests.vue'),
+      meta: { requiresAuth: true },
+    },
     // {
     //   path: '/chat',
     //   component: () => import('../views/Chat/ChatList.vue'),
@@ -50,7 +50,7 @@ const router = createRouter({
     //   component: () => import('../views/UserDetail.vue'),
     //   meta: { requiresAuth: true }
     // },
-  ]
+  ],
 })
 
 router.beforeEach((to) => {

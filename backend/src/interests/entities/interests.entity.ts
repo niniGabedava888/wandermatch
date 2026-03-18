@@ -1,3 +1,4 @@
+import { Trip } from 'src/trips/entities/trip.entity';
 import { User } from 'src/users/entities/user.entity';
 import {
   Column,
@@ -44,4 +45,11 @@ export class Interests {
 
   @CreateDateColumn()
   createdAt: Date;
+
+  @ManyToOne(() => Trip, { onDelete: 'SET NULL', nullable: true })
+  @JoinColumn({ name: 'tripId' })
+  trip: Trip;
+
+  @Column({ type: 'int', nullable: true, default: null })
+  tripId: number | null;
 }

@@ -26,10 +26,7 @@ import { DiscoverModule } from './discover/discover.module';
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        ssl:
-          configService.get('DB_HOST') !== 'localhost'
-            ? { rejectUnauthorized: false }
-            : false,
+        ssl: configService.get('DB_HOST') !== '127.0.0.1' ? { rejectUnauthorized: false } : false,
         synchronize: true,
       }),
     }),

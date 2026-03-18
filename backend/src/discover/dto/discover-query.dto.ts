@@ -1,17 +1,10 @@
 import { Type } from 'class-transformer';
-import {
-  IsDateString,
-  IsEnum,
-  IsInt,
-  IsOptional,
-  IsString,
-  Max,
-  Min,
-} from 'class-validator';
+import { IsDateString, IsEnum, IsInt, IsOptional, IsString, Max, Min } from 'class-validator';
 import { TravelStyle } from 'src/users/entities/user.entity';
 
 export class DiscoveryQueryDto {
   @IsString()
+  @IsOptional()
   city: string;
 
   @IsString()

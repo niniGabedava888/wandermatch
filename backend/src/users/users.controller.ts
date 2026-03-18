@@ -11,13 +11,7 @@ import {
   MaxFileSizeValidator,
   FileTypeValidator,
 } from '@nestjs/common';
-import {
-  ApiTags,
-  ApiBearerAuth,
-  ApiOperation,
-  ApiResponse,
-  ApiParam,
-} from '@nestjs/swagger';
+import { ApiTags, ApiBearerAuth, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { UsersService } from './users.service';
 import { CurrentUser } from 'src/common/decorators/current-user.decorator';
 import { UpdateProfileDto } from './dto/profile/update-profile.dto';
@@ -30,7 +24,7 @@ import { UploadService } from 'src/upload/upload.service';
 export class UsersController {
   constructor(
     private readonly usersService: UsersService,
-    private readonly uploadService: UploadService,
+    private readonly uploadService: UploadService
   ) {}
 
   @Get('/me')
@@ -46,7 +40,7 @@ export class UsersController {
   @ApiResponse({ status: 400, description: 'Validation failed' })
   updateMe(
     @CurrentUser() user: { id: number; email: string },
-    @Body() updateProfileDto: UpdateProfileDto,
+    @Body() updateProfileDto: UpdateProfileDto
   ) {
     return this.usersService.updateProfile(user.id, updateProfileDto);
   }
@@ -71,9 +65,9 @@ export class UsersController {
           new MaxFileSizeValidator({ maxSize: 5 * 1024 * 1024 }),
           new FileTypeValidator({ fileType: /^image\/(jpeg|png|webp)$/ }),
         ],
-      }),
+      })
     )
-    file: Express.Multer.File,
+    file: Express.Multer.File
   ) {
     const currentUser = await this.usersService.findById(user.id);
     if (currentUser.profilePhoto) {
@@ -83,11 +77,7 @@ export class UsersController {
 
     const ext = file.originalname.split('.').pop();
     const fileName = `avatars/${user.id}-${Date.now()}.${ext}`;
-    const url = await this.uploadService.upload(
-      fileName,
-      file.buffer,
-      file.mimetype,
-    );
+    const url = await this.uploadService.upload(fileName, file.buffer, file.mimetype);
 
     return this.usersService.updateProfile(user.id, { profilePhoto: url });
   }

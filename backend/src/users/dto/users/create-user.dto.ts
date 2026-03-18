@@ -1,12 +1,4 @@
-import {
-  IsEmail,
-  IsString,
-  IsOptional,
-  IsEnum,
-  IsInt,
-  Min,
-  IsArray,
-} from 'class-validator';
+import { IsEmail, IsString, IsOptional, IsEnum, IsInt, Min, IsArray } from 'class-validator';
 import { TravelStyle } from 'src/users/entities/user.entity';
 
 export class CreateUserDto {

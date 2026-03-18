@@ -11,6 +11,7 @@ export interface DiscoverResult {
   languages: string[]
   profilePhoto: string | null
   matchingTrip: {
+    id: number
     city: string
     country: string
     startDate: string
@@ -20,7 +21,7 @@ export interface DiscoverResult {
 }
 
 export interface SearchFilters {
-  city: string
+  city?: string
   country?: string
   startDate?: string
   endDate?: string
@@ -51,7 +52,7 @@ export const useDiscoverStore = defineStore('discover', () => {
     try {
       const params = {
         ...Object.fromEntries(
-          Object.entries(filters).filter(([_, v]) => v !== '' && v !== undefined)
+          Object.entries(filters).filter(([_, v]) => v !== '' && v !== undefined),
         ),
         page,
         limit: 12,
@@ -71,11 +72,11 @@ export const useDiscoverStore = defineStore('discover', () => {
     await search(currentFilters.value, page)
   }
 
-  async function sendInterest(receiverId: number) {
+  async function sendInterest(receiverId: number, tripId: number) {
     try {
-      await api.post('/interests', { receiverId })
-      results.value = results.value.map(r =>
-        r.id === receiverId ? { ...r, interestStatus: 'pending' as const } : r
+      await api.post('/interests', { receiverId, tripId })
+      results.value = results.value.map((r) =>
+        r.id === receiverId ? { ...r, interestStatus: 'pending' as const } : r,
       )
     } catch (err: any) {
       throw new Error(err.response?.data?.message || 'Failed to send interest')
@@ -89,5 +90,16 @@ export const useDiscoverStore = defineStore('discover', () => {
     meta.value = null
   }
 
-  return { results, loading, error, searched, meta, search, goToPage, sendInterest, reset }
+  return {
+    results,
+    loading,
+    error,
+    searched,
+    meta,
+    search,
+    goToPage,
+    sendInterest,
+    reset,
+    currentFilters,
+  }
 })
