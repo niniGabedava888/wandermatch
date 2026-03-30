@@ -9,6 +9,7 @@ import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { TripsModule } from './trips/trips.module';
 import { InterestsModule } from './interests/interests.module';
 import { DiscoverModule } from './discover/discover.module';
+import { ChatModule } from './chat/chat.module';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { DiscoverModule } from './discover/discover.module';
     TripsModule,
     InterestsModule,
     DiscoverModule,
+    ChatModule,
   ],
   providers: [
     {

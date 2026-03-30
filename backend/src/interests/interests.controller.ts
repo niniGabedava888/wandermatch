@@ -6,7 +6,7 @@ import { RespondInterestDto } from './dto/respond-interest.dto';
 
 @Controller('interests')
 export class InterestsController {
-  constructor(private readonly interestsService: InterestsService) {}
+  constructor(private interestsService: InterestsService) {}
 
   @Post()
   async send(@CurrentUser() user: { id: number }, @Body() dto: CreateInterestDto) {

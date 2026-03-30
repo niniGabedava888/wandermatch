@@ -12,7 +12,7 @@ export class DiscoverService {
     @InjectRepository(Trip)
     private readonly tripRepository: Repository<Trip>,
     @InjectRepository(Interests)
-    private readonly interestsRepository: Repository<Interests>,
+    private readonly interestsRepository: Repository<Interests>
   ) {}
 
   async findTravellers(currentUserId: number, query: DiscoveryQueryDto) {
