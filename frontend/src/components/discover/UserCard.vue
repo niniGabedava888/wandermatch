@@ -36,7 +36,7 @@
           disabled
           class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-gray-100 text-gray-400 border border-gray-200 cursor-not-allowed"
         >
-          ✓ Sent
+          <font-awesome-icon icon="check-circle" /> Sent
         </button>
         <button
           v-else
@@ -54,7 +54,9 @@
 
     <!-- Trip info -->
     <div class="flex items-center gap-1.5 mb-3">
-      <span class="text-xs">📍</span>
+      <span class="text-xs">
+        <font-awesome-icon icon="map-location-dot" />
+      </span>
       <span class="text-xs font-medium text-gray-600"
         >{{ user.matchingTrip.city }}, {{ user.matchingTrip.country }}</span
       >

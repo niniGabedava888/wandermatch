@@ -67,7 +67,9 @@
 
     <!-- Empty state -->
     <div v-if="trips.length === 0 && !loading" class="text-center py-12 text-gray-400">
-      <p class="text-4xl mb-3">✈️</p>
+      <p class="text-4xl mb-3">
+        <font-awesome-icon icon="plane-departure" />
+      </p>
       <p class="text-sm">No trips yet. Add your first trip!</p>
     </div>
 

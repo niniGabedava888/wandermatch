@@ -35,16 +35,22 @@ const router = createRouter({
       component: () => import('../views/Interests/Interests.vue'),
       meta: { requiresAuth: true },
     },
-    // {
-    //   path: '/chat',
-    //   component: () => import('../views/Chat/ChatList.vue'),
-    //   meta: { requiresAuth: true }
-    // },
-    // {
-    //   path: '/chat/:interestId',
-    //   component: () => import('../views/Chat/ChatRoom.vue'),
-    //   meta: { requiresAuth: true }
-    // },
+    {
+      path: '/chat',
+      component: () => import('../views/Chat/ChatLayout.vue'),
+      meta: { requiresAuth: true },
+      children: [
+        {
+          path: ':interestId',
+          component: () => import('../views/Chat/ChatWindow.vue'),
+        },
+      ],
+    },
+    {
+      path: '/chat/:interestId',
+      component: () => import('../views/Chat/ChatRoom.vue'),
+      meta: { requiresAuth: true },
+    },
     // {
     //   path: '/users/:id',
     //   component: () => import('../views/UserDetail.vue'),

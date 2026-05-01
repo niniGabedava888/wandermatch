@@ -23,6 +23,7 @@ export class AuthService {
   }
 
   async signIn(email: string, password: string) {
+    email = email.trim().toLowerCase();
     const user = await this.userService.findByEmail(email);
 
     if (!user) {

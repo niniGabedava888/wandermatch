@@ -4,7 +4,9 @@
       <div class="flex items-center gap-3 flex-wrap">
         <!-- City -->
         <div class="relative flex-1 min-w-48">
-          <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">🔍</span>
+          <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">
+            <font-awesome-icon icon="search" />
+          </span>
           <input
             v-model="filters.city"
             @keydown.enter="handleSearch"

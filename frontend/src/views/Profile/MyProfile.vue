@@ -18,7 +18,9 @@
                 : 'text-gray-500 hover:bg-gray-100 hover:text-gray-800',
             ]"
           >
-            <span>{{ item.icon }}</span>
+            <span>
+              <font-awesome-icon :icon="item.icon" />
+            </span>
             {{ item.label }}
           </button>
         </nav>
@@ -41,7 +43,7 @@ import TripsSection from '../../components/profile/TripsSection.vue'
 const active = ref('personal')
 
 const sidebar = [
-  { key: 'personal', label: 'Personal Info', icon: '👤' },
-  { key: 'trips', label: 'Trips', icon: '✈️' },
+  { key: 'personal', label: 'Personal Info', icon: 'user-circle' },
+  { key: 'trips', label: 'Trips', icon: 'plane-departure' },
 ]
 </script>

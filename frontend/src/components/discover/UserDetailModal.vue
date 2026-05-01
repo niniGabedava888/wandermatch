@@ -40,7 +40,8 @@
         <div class="bg-gray-50 rounded-xl p-3 mb-4">
           <p class="text-xs font-semibold text-gray-500 mb-1">Trip</p>
           <p class="text-sm font-medium text-gray-800">
-            📍 {{ user.matchingTrip.city }}, {{ user.matchingTrip.country }}
+            <font-awesome-icon icon="location-dot" />
+            {{ user.matchingTrip.city }}, {{ user.matchingTrip.country }}
           </p>
           <p class="text-xs text-gray-400 mt-0.5">
             {{ user.matchingTrip.startDate }} → {{ user.matchingTrip.endDate }}
@@ -78,14 +79,14 @@
           v-if="interestStatus === 'accepted'"
           class="w-full py-2.5 rounded-xl text-sm font-semibold bg-green-50 text-green-600 border border-green-200"
         >
-          ✓ Already Connected — Go to Chat
+          <font-awesome-icon icon="check-circle" /> Already Connected — Go to Chat
         </button>
         <button
           v-else-if="interestStatus === 'pending'"
           disabled
           class="w-full py-2.5 rounded-xl text-sm font-semibold bg-gray-100 text-gray-400 cursor-not-allowed"
         >
-          ✓ Interest Sent
+          <font-awesome-icon icon="check-circle" /> Interest Sent
         </button>
         <button
           v-else

@@ -16,7 +16,10 @@
         </svg>
         Saving changes
       </span>
-      <span v-else-if="saved" class="text-xs text-green-500">✓ Saved</span>
+      <span v-else-if="saved" class="text-xs text-green-500">
+        <font-awesome-icon icon="check-circle" class="mr-1" />
+        Saved
+      </span>
     </div>
 
     <!-- Avatar -->

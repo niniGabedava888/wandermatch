@@ -28,7 +28,8 @@
           v-if="interest.status === 'pending'"
           class="px-2.5 py-1 rounded-full text-xs font-medium bg-yellow-50 text-yellow-600 border border-yellow-200"
         >
-          ⏳ Pending
+          <font-awesome-icon icon="hourglass-half" />
+          Pending
         </span>
 
         <RouterLink
@@ -36,14 +37,14 @@
           :to="`/chat/${interest.id}`"
           class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-green-50 text-green-600 border border-green-200 hover:bg-green-100 transition"
         >
-          ✓ Chat →
+          <font-awesome-icon icon="check-circle" /> Chat <font-awesome-icon icon="arrow-right" />
         </RouterLink>
 
         <span
           v-else-if="interest.status === 'rejected'"
           class="px-2.5 py-1 rounded-full text-xs font-medium bg-gray-50 text-gray-400 border border-gray-200"
         >
-          ✕ Not interested
+          <font-awesome-icon icon="x" /> Not interested
         </span>
       </div>
     </div>
@@ -51,7 +52,9 @@
       v-if="interest.trip"
       class="flex items-center gap-1.5 mt-3 bg-gray-50 rounded-lg px-3 py-2"
     >
-      <span class="text-xs">📍</span>
+      <span class="text-xs">
+        <font-awesome-icon icon="map-location-dot" />
+      </span>
       <span class="text-xs font-medium text-gray-600">
         {{ interest.trip.city }}, {{ interest.trip.country }}
       </span>

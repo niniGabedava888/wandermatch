@@ -32,7 +32,9 @@
         v-if="interest.trip"
         class="flex items-center gap-1.5 mt-3 bg-gray-50 rounded-lg px-3 py-2"
       >
-        <span class="text-xs">📍</span>
+        <span class="text-xs">
+          <font-awesome-icon icon="map-location-dot" />
+        </span>
         <span class="text-xs font-medium text-gray-600">
           {{ interest.trip.city }}, {{ interest.trip.country }}
         </span>
@@ -51,7 +53,7 @@
             :disabled="responding"
             class="px-3 py-1.5 rounded-lg text-xs font-semibold border border-gray-200 text-gray-500 hover:border-red-300 hover:text-red-500 disabled:opacity-50 transition"
           >
-            ✕ Reject
+            <font-awesome-icon icon="x" /> Reject
           </button>
           <button
             @click="handleRespond('accepted')"
@@ -68,7 +70,7 @@
           :to="`/chat/${interest.id}`"
           class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-green-50 text-green-600 border border-green-200 hover:bg-green-100 transition"
         >
-          Chat →
+          Chat <font-awesome-icon icon="arrow-right" />
         </RouterLink>
 
         <!-- Rejected -->
