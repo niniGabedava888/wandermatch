@@ -153,6 +153,7 @@ const saved = ref(false)
 const error = ref<string | null>(null)
 
 const travelStyles = ['adventurous', 'relaxed', 'cultural', 'budget', 'luxury']
+
 const interestOptions = [
   'hiking',
   'food',
@@ -165,7 +166,9 @@ const interestOptions = [
   'cycling',
   'museums',
 ]
+
 const languageOptions = [
+  'Georgian',
   'English',
   'Spanish',
   'French',
@@ -175,7 +178,6 @@ const languageOptions = [
   'Japanese',
   'Chinese',
   'Arabic',
-  'Russian',
 ]
 
 const form = ref({
@@ -191,6 +193,7 @@ const form = ref({
 
 // populate form from current user on mount
 onMounted(() => {
+  console.log(auth.user)
   if (auth.user) {
     form.value = {
       name: auth.user.name ?? '',

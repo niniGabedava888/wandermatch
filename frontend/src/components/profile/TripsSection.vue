@@ -139,6 +139,11 @@ onMounted(async () => {
 
 async function addTrip() {
   formError.value = null
+  if (new Date(form.value.startDate) > new Date(form.value.endDate)) {
+    formError.value = 'Start date cannot be after end date'
+    return
+  }
+
   if (!form.value.city || !form.value.country || !form.value.startDate || !form.value.endDate) {
     formError.value = 'Please fill in all required fields'
     return

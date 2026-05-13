@@ -30,7 +30,18 @@ export class UsersService {
   async findById(id: number) {
     const user = await this.usersRepository.findOne({
       where: { id },
-      select: ['id', 'name', 'age', 'bio', 'travelStyle', 'interests', 'languages', 'profilePhoto'],
+      select: [
+        'id',
+        'name',
+        'age',
+        'bio',
+        'travelStyle',
+        'interests',
+        'languages',
+        'profilePhoto',
+        'gender',
+        'nationality',
+      ],
     });
     if (!user) throw new NotFoundException('User not found');
     return user;
@@ -43,6 +54,8 @@ export class UsersService {
         'id',
         'name',
         'email',
+        'gender',
+        'nationality',
         'age',
         'bio',
         'travelStyle',

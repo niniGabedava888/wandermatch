@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthStore } from '../stores/auth.store'
+import { watch } from 'vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -46,11 +47,6 @@ const router = createRouter({
         },
       ],
     },
-    {
-      path: '/chat/:interestId',
-      component: () => import('../views/Chat/ChatRoom.vue'),
-      meta: { requiresAuth: true },
-    },
     // {
     //   path: '/users/:id',
     //   component: () => import('../views/UserDetail.vue'),
@@ -59,8 +55,23 @@ const router = createRouter({
   ],
 })
 
-router.beforeEach((to) => {
+router.beforeEach(async (to) => {
   const auth = useAuthStore()
+
+  if (!auth.ready) {
+    await new Promise((resolve) => {
+      const stop = watch(
+        () => auth.ready,
+        (val) => {
+          if (val) {
+            stop()
+            resolve(true)
+          }
+        },
+      )
+    })
+  }
+
   if (to.meta.requiresAuth && !auth.isLoggedIn) return '/login'
   if (to.meta.guestOnly && auth.isLoggedIn) return '/discover'
 })

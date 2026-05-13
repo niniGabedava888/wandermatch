@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 import { Trip } from '../../trips/entities/trip.entity';
 import { Interests } from 'src/interests/entities/interests.entity';
+import { RefreshToken } from 'src/auth/entities/refresh-token.entity';
 
 export enum TravelStyle {
   ADVENTUROUS = 'adventurous',
@@ -72,4 +73,7 @@ export class User {
 
   @OneToMany(() => Interests, (interest) => interest.sender)
   sentInterests: Interests[];
+
+  @OneToMany(() => RefreshToken, (token) => token.userId)
+  refreshTokens: RefreshToken[];
 }

@@ -1,14 +1,17 @@
+import { useAuthStore } from '@/stores/auth.store'
 import { io, type Socket } from 'socket.io-client'
 
 let socket: Socket | null = null
 
 export function useSocket() {
   function connect() {
+    const auth = useAuthStore()
     if (socket?.connected) return
     socket = io('localhost:3000', {
       auth: {
-        token: localStorage.getItem('token'),
+        token: auth.token,
       },
+      withCredentials: true,
     })
   }
 

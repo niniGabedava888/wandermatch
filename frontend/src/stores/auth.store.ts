@@ -25,10 +25,11 @@ interface User {
 }
 
 export const useAuthStore = defineStore('auth', () => {
-  const token = ref<string | null>(localStorage.getItem('token'))
+  const token = ref<string | null>(null)
   const user = ref<User | null>(null)
   const loading = ref(false)
   const error = ref<string | null>(null)
+  const ready = ref(false)
 
   const isLoggedIn = computed(() => !!token.value)
 
@@ -37,8 +38,8 @@ export const useAuthStore = defineStore('auth', () => {
     error.value = null
     try {
       const res = await api.post('/auth/sign-up', { name, email, password })
-      token.value = res.data.token
-      localStorage.setItem('token', res.data.token)
+      token.value = res.data.accessToken
+      await fetchCurrentUser()
     } catch (err: any) {
       error.value = err.response?.data?.message || 'Registration failed'
       throw err
@@ -52,8 +53,7 @@ export const useAuthStore = defineStore('auth', () => {
     error.value = null
     try {
       const res = await api.post('/auth/sign-in', { email, password })
-      token.value = res.data.token
-      localStorage.setItem('token', res.data.token)
+      token.value = res.data.accessToken
       await fetchCurrentUser()
     } catch (err: any) {
       error.value = err.response?.data?.message || 'Login failed'
@@ -67,16 +67,31 @@ export const useAuthStore = defineStore('auth', () => {
     try {
       const res = await api.get('/users/me')
       user.value = res.data
-    } catch {
-      logout()
+    } catch (err: any) {
+      if (err.response?.status === 401) {
+        await logout()
+      }
     }
   }
 
-  function logout() {
+  async function logout() {
+    try {
+      await api.post('/auth/logout')
+    } catch {}
     token.value = null
     user.value = null
-    localStorage.removeItem('token')
   }
 
-  return { token, user, loading, error, isLoggedIn, register, login, logout, fetchCurrentUser }
+  return {
+    token,
+    user,
+    loading,
+    error,
+    isLoggedIn,
+    register,
+    login,
+    logout,
+    fetchCurrentUser,
+    ready,
+  }
 })

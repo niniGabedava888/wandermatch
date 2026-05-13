@@ -4,9 +4,12 @@ import { AuthService } from './auth.service';
 import { UsersModule } from 'src/users/users.module';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { RefreshToken } from './entities/refresh-token.entity';
 
 @Module({
   imports: [
+    TypeOrmModule.forFeature([RefreshToken]),
     UsersModule,
     JwtModule.registerAsync({
       global: true,

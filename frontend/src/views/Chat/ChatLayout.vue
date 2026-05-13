@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-full overflow-hidden bg-white">
+  <div class="flex h-full overflow-hidden bg-white height: calc(100vh - 57px)">
     <!-- Sidebar -->
     <div class="w-72 flex flex-col shrink-0 border-r border-gray-200" style="background: #fafafa">
       <!-- Header -->

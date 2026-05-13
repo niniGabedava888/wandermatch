@@ -1,4 +1,9 @@
-import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Trip } from './entities/trip.entity';
@@ -9,6 +14,10 @@ export class TripsService {
   constructor(@InjectRepository(Trip) private tripRepository: Repository<Trip>) {}
 
   async create(userId: number, createTripDto: CreateTripDto) {
+    if (new Date(createTripDto.startDate) > new Date(createTripDto.endDate)) {
+      throw new BadRequestException('Start date cannot be after end date');
+    }
+
     const trip = this.tripRepository.create({ ...createTripDto, userId });
     await this.tripRepository.save(trip);
     return trip;
