@@ -99,7 +99,7 @@
           @click="deleteTrip(trip.id)"
           class="text-gray-300 hover:text-red-400 transition text-lg leading-none ml-4"
         >
-          ✕
+          <font-awesome-icon icon="delete-left" />
         </button>
       </div>
     </div>

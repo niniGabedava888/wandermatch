@@ -16,10 +16,6 @@
         </svg>
         Saving changes
       </span>
-      <span v-else-if="saved" class="text-xs text-green-500">
-        <font-awesome-icon icon="check-circle" class="mr-1" />
-        Saved
-      </span>
     </div>
 
     <!-- Avatar -->
@@ -128,13 +124,14 @@
       <div v-if="error" class="bg-red-50 text-red-500 text-xs rounded-lg px-4 py-3 mb-4">
         {{ error }}
       </div>
-
       <button
         type="submit"
         :disabled="saving"
-        class="bg-gray-900 hover:bg-gray-800 disabled:opacity-50 text-white text-sm font-semibold px-6 py-2.5 rounded-lg transition"
+        :class="saved ? 'bg-green-600 hover:bg-green-500' : 'bg-gray-900 hover:bg-gray-800'"
+        class="disabled:opacity-50 text-white text-sm font-semibold px-6 py-2.5 rounded-lg transition"
       >
-        Save Changes
+        <font-awesome-icon icon="check-circle" class="mr-1" v-if="saved" />
+        {{ saving ? 'Saving...' : saved ? 'Saved' : 'Save changes' }}
       </button>
     </form>
   </div>
@@ -215,7 +212,7 @@ async function handleSave() {
     const res = await api.patch('/users/me', form.value)
     auth.user = res.data // update store with fresh data
     saved.value = true
-    setTimeout(() => (saved.value = false), 2000)
+    setTimeout(() => (saved.value = false), 3000)
   } catch (err: any) {
     error.value = err.response?.data?.message || 'Failed to save'
   } finally {

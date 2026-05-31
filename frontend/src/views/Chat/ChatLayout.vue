@@ -20,7 +20,9 @@
 
       <!-- Empty state -->
       <div v-else-if="chatStore.chats.length === 0" class="text-center py-12 px-4">
-        <p class="text-2xl mb-2">💬</p>
+        <p class="text-2xl mb-2">
+          <font-awesome-icon icon="comment" />
+        </p>
         <p class="text-xs text-gray-400 mb-2">No conversations yet</p>
         <RouterLink to="/interests" class="text-xs font-medium" style="color: #d97706">
           Check interests →
@@ -48,7 +50,9 @@
         class="flex-1 flex flex-col items-center justify-center"
         style="background: #fafafa"
       >
-        <p class="text-4xl mb-3">✈️</p>
+        <p class="text-4xl mb-3">
+          <font-awesome-icon icon="search" />
+        </p>
         <p class="text-gray-700 font-semibold mb-1">Select a conversation</p>
         <p class="text-sm text-gray-400">Choose a chat from the left to start messaging</p>
       </div>

@@ -40,6 +40,7 @@ export const useAuthStore = defineStore('auth', () => {
       const res = await api.post('/auth/sign-up', { name, email, password })
       token.value = res.data.accessToken
       await fetchCurrentUser()
+      ready.value = true
     } catch (err: any) {
       error.value = err.response?.data?.message || 'Registration failed'
       throw err
@@ -55,6 +56,7 @@ export const useAuthStore = defineStore('auth', () => {
       const res = await api.post('/auth/sign-in', { email, password })
       token.value = res.data.accessToken
       await fetchCurrentUser()
+      ready.value = true
     } catch (err: any) {
       error.value = err.response?.data?.message || 'Login failed'
       throw err
@@ -80,6 +82,7 @@ export const useAuthStore = defineStore('auth', () => {
     } catch {}
     token.value = null
     user.value = null
+    ready.value = false
   }
 
   return {

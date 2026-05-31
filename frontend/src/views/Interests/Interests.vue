@@ -56,7 +56,9 @@
       <!-- Received Tab -->
       <div v-else-if="activeTab === 'received'">
         <div v-if="store.received.length === 0" class="text-center py-16">
-          <p class="text-4xl mb-3">💌</p>
+          <p class="text-4xl mb-3">
+            <font-awesome-icon icon="message" />
+          </p>
           <p class="text-gray-700 font-semibold mb-1">No interests yet</p>
           <p class="text-sm text-gray-400">
             When someone is interested in travelling with you, they'll appear here
@@ -74,7 +76,9 @@
       <!-- Sent Tab -->
       <div v-else-if="activeTab === 'sent'">
         <div v-if="store.sent.length === 0" class="text-center py-16">
-          <p class="text-4xl mb-3">✈️</p>
+          <p class="text-4xl mb-3">
+            <font-awesome-icon icon="plane" />
+          </p>
           <p class="text-gray-700 font-semibold mb-1">No interests sent yet</p>
           <p class="text-sm text-gray-400">Go to Discover to find your travel companion</p>
           <RouterLink

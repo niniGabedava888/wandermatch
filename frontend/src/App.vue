@@ -17,12 +17,14 @@
           <RouterLink to="/chat" class="hover:text-orange-500 transition">Chat</RouterLink>
           <RouterLink to="/profile" class="hover:text-orange-500 transition">Profile</RouterLink>
         </div>
-        <button
-          @click="handleLogout"
-          class="text-sm text-red-400 hover:text-red-600 font-medium transition"
-        >
-          Logout
-        </button>
+        <div class="flex justify-center w-24 h-8 bg-orange-400 rounded-md">
+          <button
+            @click="handleLogout"
+            class="text-sm text-black hover:text-white font-medium transition"
+          >
+            Logout
+          </button>
+        </div>
       </div>
     </nav>
 

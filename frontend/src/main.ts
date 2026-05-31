@@ -21,6 +21,9 @@ library.add(
   solidIcons.faX,
   solidIcons.faArrowRight,
   solidIcons.faLocationDot,
+  solidIcons.faComment,
+  solidIcons.faMessage,
+  solidIcons.faDeleteLeft,
 )
 const app = createApp(App)
 
