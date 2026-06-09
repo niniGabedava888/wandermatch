@@ -108,8 +108,12 @@ onMounted(async () => {
   if (chatStore.chats.length === 0) {
     await chatStore.getMyChats()
   }
+  chatStore.clearMessages();
+
   await chatStore.getMessages(interestId.value)
   socket.connect()
+
+  socket.off('newMessage');
   socket.on('newMessage', (message) => {
     chatStore.addMessage(message)
   })
@@ -119,7 +123,6 @@ onMounted(async () => {
 onUnmounted(() => {
   socket.emit('leaveRoom', interestId.value)
   socket.disconnect()
-  chatStore.clearMessages()
 })
 
 const otherUser = computed(() => {

@@ -58,7 +58,7 @@
       </div>
 
       <!-- Chat window -->
-      <RouterView v-else />
+      <RouterView :key="$route.params.interestId" />
     </div>
   </div>
 </template>
