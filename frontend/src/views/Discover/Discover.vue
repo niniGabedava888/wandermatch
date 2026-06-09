@@ -67,7 +67,11 @@
       />
     </div>
 
-    <UserDetailModal :user="selectedUser" @close="selectedUser = null" />
+    <UserDetailModal
+      :user="selectedUser"
+      :interest-id="selectedUser?.interestId"
+      @close="selectedUser = null"
+    />
   </div>
 </template>
 

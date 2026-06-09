@@ -30,7 +30,9 @@
         v-else-if="chatStore.messages.length === 0"
         class="flex flex-col items-center justify-center flex-1 py-16"
       >
-        <p class="text-3xl mb-3">👋</p>
+        <p class="text-3xl mb-3">
+          <font-awesome-icon icon="hand" />
+        </p>
         <p class="text-sm text-gray-500">Say hello to {{ otherUser?.name }}!</p>
       </div>
 
@@ -108,12 +110,12 @@ onMounted(async () => {
   if (chatStore.chats.length === 0) {
     await chatStore.getMyChats()
   }
-  chatStore.clearMessages();
+  chatStore.clearMessages()
 
   await chatStore.getMessages(interestId.value)
   socket.connect()
 
-  socket.off('newMessage');
+  socket.off('newMessage')
   socket.on('newMessage', (message) => {
     chatStore.addMessage(message)
   })

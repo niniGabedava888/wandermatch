@@ -4,7 +4,6 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUser, faCoffee } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import * as solidIcons from '@fortawesome/free-solid-svg-icons'
 

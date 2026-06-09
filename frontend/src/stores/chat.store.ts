@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import api from '@/api/axios'
 
 export interface ChatUser {
@@ -36,6 +36,7 @@ export const useChatStore = defineStore('chat', () => {
   const messages = ref<Message[]>([])
   const loading = ref(false)
   const error = ref<string | null>(null)
+  const myChatsCount = computed(() => chats.value.length)
 
   async function getMyChats() {
     loading.value = true
@@ -77,5 +78,15 @@ export const useChatStore = defineStore('chat', () => {
     messages.value = []
   }
 
-  return { getMyChats, getMessages, addMessage, clearMessages, chats, messages, error, loading }
+  return {
+    getMyChats,
+    getMessages,
+    addMessage,
+    clearMessages,
+    chats,
+    messages,
+    error,
+    loading,
+    myChatsCount,
+  }
 })

@@ -18,6 +18,7 @@ export interface DiscoverResult {
     endDate: string
   }
   interestStatus: 'pending' | 'accepted' | 'rejected' | null
+  interestId: number
 }
 
 export interface SearchFilters {
@@ -44,6 +45,7 @@ export const useDiscoverStore = defineStore('discover', () => {
   const searched = ref(false)
   const meta = ref<PaginationMeta | null>(null)
   const currentFilters = ref<SearchFilters>({} as SearchFilters)
+  const interestId = ref<number | null>(null)
 
   async function search(filters: SearchFilters, page = 1) {
     loading.value = true
@@ -74,7 +76,8 @@ export const useDiscoverStore = defineStore('discover', () => {
 
   async function sendInterest(receiverId: number, tripId: number) {
     try {
-      await api.post('/interests', { receiverId, tripId })
+      const res = await api.post('/interests', { receiverId, tripId })
+      interestId.value = res.data?.id
       results.value = results.value.map((r) =>
         r.id === receiverId ? { ...r, interestStatus: 'pending' as const } : r,
       )
@@ -101,5 +104,6 @@ export const useDiscoverStore = defineStore('discover', () => {
     sendInterest,
     reset,
     currentFilters,
+    interestId,
   }
 })

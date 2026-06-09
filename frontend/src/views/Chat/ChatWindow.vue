@@ -131,7 +131,7 @@ onMounted(async () => {
 
 onUnmounted(() => {
   socket.emit('leaveRoom', { interestId: interestId.value })
-  socket.disconnect()
+  socket.off('newMessage')
   chatStore.clearMessages()
 })
 

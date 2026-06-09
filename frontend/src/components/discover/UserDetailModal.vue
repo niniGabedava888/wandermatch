@@ -77,6 +77,7 @@
         <!-- Action button -->
         <button
           v-if="interestStatus === 'accepted'"
+          @click="handleRedirection"
           class="w-full py-2.5 rounded-xl text-sm font-semibold bg-green-50 text-green-600 border border-green-200"
         >
           <font-awesome-icon icon="check-circle" /> Already Connected — Go to Chat
@@ -104,24 +105,22 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useDiscoverStore, type DiscoverResult } from '../../stores/discover.store'
+import { useRouter } from 'vue-router'
 
-const props = defineProps<{ user: DiscoverResult | null }>()
+const props = defineProps<{ user: DiscoverResult | null; interestId: number | undefined }>()
 defineEmits(['close'])
 
 const discover = useDiscoverStore()
+const router = useRouter()
 const sending = ref(false)
 const error = ref<string | null>(null)
 
-const interestStatus = ref(props.user?.interestStatus ?? null)
-
-watch(
-  () => props.user?.interestStatus,
-  (newVal) => {
-    interestStatus.value = newVal ?? null
-  },
-)
+const interestStatus = computed(() => {
+  if (!props.user) return null
+  return discover.results.find((r) => r.id === props.user!.id)?.interestStatus ?? null
+})
 
 async function handleInterest() {
   if (!props.user) return
@@ -133,5 +132,9 @@ async function handleInterest() {
   } finally {
     sending.value = false
   }
+}
+
+async function handleRedirection() {
+  router.push(`/chat/${props.interestId}`)
 }
 </script>

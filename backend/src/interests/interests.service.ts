@@ -10,12 +10,16 @@ import { Interests, InterestsStatus } from './entities/interests.entity';
 import { Repository } from 'typeorm';
 import { CreateInterestDto } from './dto/create-interest.dto';
 import { RespondInterestDto } from './dto/respond-interest.dto';
+import { ChatGateway } from 'src/chat/chat-gateway';
+import { UsersService } from 'src/users/users.service';
 
 @Injectable()
 export class InterestsService {
   constructor(
     @InjectRepository(Interests)
-    private interestsRepository: Repository<Interests>
+    private interestsRepository: Repository<Interests>,
+    private chatGateway: ChatGateway,
+    private usersService: UsersService
   ) {}
 
   async send(senderId: number, dto: CreateInterestDto) {
@@ -30,14 +34,23 @@ export class InterestsService {
       throw new ConflictException('You have already sent interest to this user!');
     }
 
-    const interest = this.interestsRepository.create({
+    const interest = await this.interestsRepository.save({
       senderId,
       receiverId: dto.receiverId,
       tripId: dto.tripId,
       status: InterestsStatus.PENDING,
     });
 
-    return this.interestsRepository.save(interest);
+    const sender = await this.usersService.findById(senderId);
+    const room = `user-${dto.receiverId}`;
+    this.chatGateway.server.to(room).emit('newInterestNotification', {
+      senderName: sender.name,
+      profilePhoto: sender.profilePhoto ?? null,
+      senderId,
+      interestId: interest.id,
+    });
+
+    return interest;
   }
 
   async getReceived(userId: number) {

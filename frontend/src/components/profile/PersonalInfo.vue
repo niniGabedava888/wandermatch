@@ -190,7 +190,6 @@ const form = ref({
 
 // populate form from current user on mount
 onMounted(() => {
-  console.log(auth.user)
   if (auth.user) {
     form.value = {
       name: auth.user.name ?? '',

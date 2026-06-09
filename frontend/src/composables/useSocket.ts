@@ -5,12 +5,14 @@ let socket: Socket | null = null
 
 export function useSocket() {
   function connect() {
-    const auth = useAuthStore()
     if (socket?.connected) return
+    const auth = useAuthStore()
     socket = io('localhost:3000', {
       auth: {
         token: auth.token,
       },
+      reconnectionAttempts: 5,
+      reconnectionDelay: 2000,
       withCredentials: true,
     })
   }
@@ -32,5 +34,8 @@ export function useSocket() {
     socket?.off(event)
   }
 
-  return { connect, disconnect, emit, on, off }
+  function isConnected() {
+    return socket !== null
+  }
+  return { connect, disconnect, emit, on, off, isConnected }
 }

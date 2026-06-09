@@ -35,10 +35,9 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
       const payload = this.jwtService.verify(token, {
         secret: process.env.JWT_SECRET,
       });
-
       client.data.user = payload;
-      console.log(`Client connected: userId=${payload.id}`);
-    } catch {
+      client.join(`user-${payload.id}`);
+    } catch (err) {
       client.disconnect();
     }
   }
@@ -75,7 +74,8 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
       if (!data.content.trim()) return;
 
-      await this.chatService.verifyAccess(data.interestId, userId);
+      const interest = await this.chatService.verifyAccess(data.interestId, userId);
+      const receiverId = interest.senderId === userId ? interest.receiverId : interest.senderId;
 
       const message = await this.chatService.saveMessage(
         data.interestId,
@@ -90,6 +90,16 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
         senderId: userId,
         interestId: data.interestId,
         createdAt: message.createdAt,
+      });
+
+      // room for notifications
+      const notificationToastRoom = `user-${receiverId}`;
+
+      this.server.to(notificationToastRoom).emit('newMessageInChat', {
+        senderName: message.sender.name,
+        profilePhoto: message.sender.profilePhoto ?? null,
+        content: message.content,
+        interestId: data.interestId,
       });
     } catch (error: any) {
       client.emit('error', { message: error.message });
